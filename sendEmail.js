@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendEmail = async () => {
+const sendEmail = async (req, res) => {
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -11,19 +11,29 @@ const sendEmail = async () => {
     },
   });
 
-  let info = await transporter.sendMail({
-    from: 'Carlos Díaz Flores👻" <diaz.flores.c@gmail.com>',
-    to: 'diaz.flores.c@hotmail.com,',
-    subject: 'Hello ✔',
-    html: `<h1>NODEMON</h1>
+  await transporter.sendMail(
+    {
+      from: 'Carlos Díaz Flores👻" <diaz.flores.c@gmail.com>',
+      to: 'diaz.flores.c@hotmail.com,',
+      subject: 'Hello ✔',
+      html: `<h1>NODEMON</h1>
     <p>Hola David, te envío mi primer correo con Nodemon. Tuve que desactivar el antivirus para poder enviarlo. Bentido San Google 😁</p>
     <p>Este es el <a href="https://github.com/cqrlosdiqz/myFirstExpressServer">link</a> del repositorio</p>
     <p>Que tengas un buen fin de semana</p>
     <p>Carlos Díaz Flores</p>
     `,
-  });
-
-  console.log('Message sent: %s', info.messageId);
+    },
+    (error, info) => {
+      if (error) {
+        console.log(error);
+        res.send(500, err.message);
+      } else {
+        console.log('Email sent');
+        console.log('Message sent: %s', info.messageId);
+        res.status(200).send("Email sent satisfactory");
+      }
+    }
+  );
 };
 
 module.exports = sendEmail;

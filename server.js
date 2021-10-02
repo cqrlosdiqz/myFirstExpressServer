@@ -74,15 +74,7 @@ server.use('/image', (req, res) => {
   res.status(200).sendFile(message);
 });
 
-server.use('/email', async (req, res) => {
-  try {
-    await sendEmail();
-  } catch (error) {
-    console.log(error);
-  }
-
-  res.status(200).send('Email send');
-});
+server.use('/email', sendEmail);
 
 server.use('*', (req, res) => {
   res.status(404).send(`<h1>NOT FOUND</h1>`);
