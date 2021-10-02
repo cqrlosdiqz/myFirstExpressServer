@@ -1,6 +1,6 @@
 const express = require('express');
 const moment = require('moment');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
 const sendEmail = require('./sendEmail');
@@ -74,8 +74,10 @@ server.use('/image', (req, res) => {
   res.status(200).sendFile(message);
 });
 
+//Email
 server.use('/email', sendEmail);
 
+//Not found
 server.use('*', (req, res) => {
   res.status(404).send(`<h1>NOT FOUND</h1>`);
 });
