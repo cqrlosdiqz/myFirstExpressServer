@@ -16,7 +16,7 @@ const sendEmail = async (req, res) => {
       from: 'Carlos Díaz Flores👻" <diaz.flores.c@gmail.com>',
       to: 'davidcarvajalg@gmail.com, diaz.flores.c@gmail.com',
       subject: 'Hello David, soy Carlos Díaz ✔',
-      html: `<h1>NODEMON</h1>
+      html: `<h1>NODEMAILER</h1>
     <p>Hola David, te envío mi primer correo con Nodemon. Tuve que desactivar el antivirus para poder enviarlo. Bendito San Google 😁</p>
     <p>Este es el <a href="https://github.com/cqrlosdiqz/myFirstExpressServer">link</a> del repositorio</p>
     <p>Que tengas un buen fin de semana</p>
