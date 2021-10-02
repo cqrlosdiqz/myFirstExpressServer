@@ -19,7 +19,7 @@ const sendEmail = async (req, res) => {
       html: `<h1>NODEMAILER</h1>
     <p>Hola David, te envío mi primer correo con Nodemon. Tuve que desactivar el antivirus para poder enviarlo. Bendito San Google 😁</p>
     <p>Este es el <a href="https://github.com/cqrlosdiqz/myFirstExpressServer">link</a> del repositorio</p>
-    <p>Que tengas un buen fin de semana</p>
+    <p>Que tengas un buen fin de semana!</p>
     <p>Carlos Díaz Flores</p>
     `,
     },
