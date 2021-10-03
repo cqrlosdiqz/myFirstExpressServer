@@ -2,8 +2,9 @@ const express = require('express');
 const moment = require('moment');
 require('dotenv').config();
 const path = require('path');
-const fs = require('fs');
+
 const sendEmail = require('./sendEmail');
+const requestsLog = require('./requestsLog');
 
 const server = express();
 
@@ -13,29 +14,12 @@ const port = 8080;
 //Static
 server.use(express.static(path.join(__dirname, 'public')));
 
-//function
-const requestsLog = (req, res, next) => {
-  const now = moment().format('DD-MM-YYYY HH:mm:ss');
-  try {
-    const newline = `${now} - ${res.statusCode} ${req.originalUrl}\n`;
-
-    fs.appendFile('requests.log', newline, (error, file) => {
-      console.log('Saved log!');
-      next();
-    });
-  } catch (error) {
-    console.log(error);
-    next();
-  }
-};
-
 //Middleware
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(requestsLog);
 
 //Endpoints
-
 server.use('/home', (req, res) => {
   const message = `
     <h1>!Ya sé Node!</h1>
@@ -74,10 +58,10 @@ server.use('/image', (req, res) => {
   res.status(200).sendFile(message);
 });
 
-//Email
+// -- Email --//
 server.use('/email', sendEmail);
 
-//Not found
+//--Not found--/
 server.use('*', (req, res) => {
   res.status(404).send(`<h1>NOT FOUND</h1>`);
 });
