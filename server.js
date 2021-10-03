@@ -20,7 +20,7 @@ const requestsLog = (req, res, next) => {
     const newline = `${now} - ${res.statusCode} ${req.originalUrl}\n`;
 
     fs.appendFile('requests.log', newline, (error, file) => {
-      console.log('Saved!');
+      console.log('Saved log!');
       next();
     });
   } catch (error) {
